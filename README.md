@@ -9,7 +9,7 @@ A timed coding quiz with multiple-choice questions.
 * JavaScript
 
 ## Website Screenshot
-![Code Quiz Application Screenshot](https://github.com/mikegshelby/portfolio/raw/main/assets/images/code-quiz-screenshot.jpg "Website Screenshot")
+![Code Quiz Application Screenshot](https://github.com/mikegshelby/code-quiz/raw/main/assets/images/code-quiz-screenshot.jpg "Website Screenshot")
 
 
 ## Website
