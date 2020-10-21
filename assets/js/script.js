@@ -33,6 +33,7 @@ var createStartEl = function() {
     // create start button
     var startQuizBtn = document.createElement("button");
     startQuizBtn.className = "btn-start";
+    startQuizBtn.setAttribute("onclick", "createQuizEl()");
     startQuizBtn.innerHTML = "Start Quiz";
     startSectionEl.appendChild(startQuizBtn);
 
@@ -42,15 +43,13 @@ var createStartEl = function() {
     mainContentEl = document.querySelector(".main-content");
     // add start section to main content element
     mainContentEl.appendChild(startSectionEl);
+
 }
-
-createStartEl();
-
 
 
 
 // This function creates HTML quiz elements, including section, h3, ol, and buttons
-var createQuizEl = function(event) {
+var createQuizEl = function() {
             var startSectionEl = document.querySelector(".start-section");
             startSectionEl.remove();
 
@@ -91,8 +90,13 @@ var createQuizEl = function(event) {
             answerBtn4.setAttribute("id", "4");
             answerListEl.appendChild(answerBtn4);
 
+            // create answer feedback footer
+            var answerFeedbackEl = document.createElement("footer");
+            answerFeedbackEl.className = "answer-feedback";
+
             // append title and list to new section element
             quizSectionEl.appendChild(answerListEl);
+            quizSectionEl.appendChild(answerFeedbackEl);
 
             // get main content element
             mainContentEl = document.querySelector(".main-content");
@@ -100,44 +104,48 @@ var createQuizEl = function(event) {
             mainContentEl.appendChild(quizSectionEl);
 
             addQuestionInfo(questionTitleEl, answerBtn1, answerBtn2, answerBtn3, answerBtn4, 0);
-
-
 }
 
-
-
-// responseValidator = function(event) {
-//     var buttonSelection = event.target.getAttribute("id");
-//     console.log(buttonSelection);
-// }
-
-
-
-var feedbackEl = function() {
-    // create answer feedback footer
-    var answerFeedbackEl = document.createElement("footer");
-    answerFeedbackEl.className = "answer-feedback";
-    answerFeedbackEl.innerHTML = "ANSWER FEEDBACK";
-    quizSectionEl.appendChild(answerFeedbackEl);
-}
+createStartEl();
 
 var addQuestionInfo = function(questionTitleEl, answerBtn1, answerBtn2, answerBtn3, answerBtn4, i) {
     // All quiz question/answer object variables saved in an array
     var allQuestions = [quizQuestion1, quizQuestion2, quizQuestion3, quizQuestion4, quizQuestion5]
 
-    questionTitleEl.innerHTML = allQuestions[i].questionText;
-    answerBtn1.innerHTML = "<li>" + allQuestions[i].answer1 + "</li>";
-    answerBtn2.innerHTML = "<li>" + allQuestions[i].answer2 + "</li>";
-    answerBtn3.innerHTML = "<li>" + allQuestions[i].answer3 + "</li>";
-    answerBtn4.innerHTML = "<li>" + allQuestions[i].answer4 + "</li>";
+        questionTitleEl.innerHTML = allQuestions[i].questionText;
+        answerBtn1.innerHTML = "<li>" + allQuestions[i].answer1 + "</li>";
+        answerBtn2.innerHTML = "<li>" + allQuestions[i].answer2 + "</li>";
+        answerBtn3.innerHTML = "<li>" + allQuestions[i].answer3 + "</li>";
+        answerBtn4.innerHTML = "<li>" + allQuestions[i].answer4 + "</li>";
+
+        mainContentEl.addEventListener("click", responseValidator);
+}
+
+var responseValidator = function(event) {
+    var allQuestions = [quizQuestion1, quizQuestion2, quizQuestion3, quizQuestion4, quizQuestion5]
+    var buttonSelection = event.target.innerText;
+    var correctAnswer = allQuestions[0].correctAnswer;
+
+    console.log(buttonSelection);
+    console.log(correctAnswer);
+
+    if (buttonSelection === correctAnswer && buttonSelection === document.querySelector(".btn")) {
+        console.log("CORRECT");
+        var answer = "correct!";
+        // Add all quiz components for next question?
+        // addQuestionInfo(questionText, answerBtn1, answerBtn2, answerBtn3, answerBtn4, i);
+    }
+    else if (buttonSelection != correctAnswer && buttonSelection === document.querySelector(".btn")) {
+        console.log("FALSE");
+        var answer = "incorrect!";
     }
 
+    feedback(answer);
+}
 
-mainContentEl.addEventListener("click", createQuizEl);
-
-
-
-
+var feedback = function(answer) {
+    answer = document.querySelector("answer-feedback");
+}
 
 
 
