@@ -147,5 +147,18 @@ var feedback = function(answer) {
     answer = document.querySelector("answer-feedback");
 }
 
+// Use one of these to create a timer
+
+// This will delay something from appearing on the page
+// setTimeout(() => {
+
+// }, timeout);
+
+// This will do something repeatedly while a page is viewed
+// setInterval(() => {
+
+// }, interval);
+
+
 
 
